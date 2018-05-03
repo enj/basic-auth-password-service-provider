@@ -14,6 +14,21 @@ if (!empty($user)) {
     $data = array(
         'sub' => $user
     );
+
+    // Map of optional environment variables to optional JSON fields
+    $env_map = array(
+        'REMOTE_USER_MAIL' => 'email',
+        'REMOTE_USER_DISPLAY_NAME' => 'name',
+        'REMOTE_USER_PREFERRED_USERNAME' => 'preferred_username'
+    );
+
+    // Add all non-empty environment variables to JSON data
+    foreach ($env_map as $env_name => $json_name) {
+        $env_data = apache_getenv($env_name)
+        if (!empty($env_data)) {
+            $data[$json_name] = $env_data
+        }
+    }
 }
 
 // We always output JSON from this script
