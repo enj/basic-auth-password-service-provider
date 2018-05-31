@@ -24,9 +24,9 @@ if (!empty($user)) {
 
     // Add all non-empty environment variables to JSON data
     foreach ($env_map as $env_name => $json_name) {
-        $env_data = apache_getenv($env_name)
+        $env_data = apache_getenv($env_name);
         if (!empty($env_data)) {
-            $data[$json_name] = $env_data
+            $data[$json_name] = $env_data;
         }
     }
 }
